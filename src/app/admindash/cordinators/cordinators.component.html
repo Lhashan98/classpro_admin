@@ -1,0 +1,124 @@
+<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard | By Code Info</title>
+    
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  </head>
+
+  <div class="container">
+
+    <nav>
+      <ul>
+        <li><a href="" routerLink="/admindash" class="logo">
+          <img src="assets/image/logo.png" alt="">
+          <span class="nav-item">DashBoard</span>
+        </a></li>
+        <li><a href="#" routerLink="/request">
+          <i class="fas fa-home"></i>
+          <span class="nav-item" >Request</span>
+        </a></li>
+        <li><a href="" routerLink="/addcordinator">
+          <i class="fas fa-user"></i>
+          <span class="nav-item">Register Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/cordinators">
+          <i class="fas fa-users"></i>
+          <span class="nav-item">Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/addnewclass">
+          <i class="fas fa-edit"></i>
+          <span class="nav-item">Update Classrooms</span>
+        </a></li>
+        <li><a href="" routerLink="/viewclass">
+          <i class="fas fa-chart-bar"></i>
+          <span class="nav-item">View Class</span>
+        </a></li>
+        <li><a href="" routerLink="/availableclasses">
+          <i class="fas fa-tasks"></i>
+          <span class="nav-item">Available classes</span>
+        </a></li>
+        <li><a href="" routerLink="/reports">
+          <i class="fas fa-wallet"></i>
+          <span class="nav-item">Reports</span>
+        </a></li>
+        <!-- <li><a href="">
+          <i class="fas fa-cog"></i>
+          <span class="nav-item">Settings</span>
+        </a></li> -->
+        <li><a href="" routerLink="/checktimetable">
+          <i class="fas fa-clock"></i>
+          <span class="nav-item">Time Table</span>
+        </a></li>
+     
+        <li><a href="" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="nav-item">Log out</span>
+        </a></li>
+      </ul>
+    </nav>
+  </div> 
+          
+<!-- Nav Bar close -->
+
+<div class="container2">
+  <h3>COORDINATORS DETAILS</h3>
+  <!-- <div class="search-bar">
+    <input type="text" class="search-input" [(ngModel)]="searchTerm" placeholder="Search">
+    <button class="search-button">Search</button>
+  </div> -->
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Employee Number</th>
+        <th scope="col">Enter Name</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Enter Department</th>
+        <th scope="col">Telephone Number</th>
+        <th scope="col">Option</th>
+        <th scope="col">Option</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coordinatorItem of cordinatorsArray">
+        <td>{{ coordinatorItem.enumber }}</td>
+        <td>{{ coordinatorItem.name }}</td>
+        <td>{{ coordinatorItem.email }}</td>
+        <td>{{ coordinatorItem.department }}</td>
+        <td>{{ coordinatorItem.telephone }}</td>
+        <td>
+          <button type="button" (click)="editCoordinator(coordinatorItem)">Edit</button></td>
+          <td>
+          <button type="button" class="delete" (click)="deleteCoordinator(coordinatorItem)">Delete</button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+<!--   
+  <div id="editForm" *ngIf="selectedCoordinator">
+    <h2>Edit Coordinator</h2>
+    <form [formGroup]="coordinatorForm" (ngSubmit)="saveChanges()">
+      <label for="enumber">Employee Number:</label>
+      <input type="text" id="enumber" formControlName="enumber">
+      <br>
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name">
+      <br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+      <br>
+      <label for="department">Department:</label>
+      <input type="text" id="department" formControlName="department">
+      <br>
+      <label for="telephone">Telephone:</label>
+      <input type="tel" id="telephone" formControlName="telephone">
+      <br>
+      <button type="submit">Save Changes</button>
+      <button type="button" (click)="closeEditForm()">Cancel</button>
+    </form>
+  </div> -->
+  
+</div>

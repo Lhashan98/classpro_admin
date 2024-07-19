@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  display: flex;
+}
+
+nav {
+  position: fixed;
+  top: 10px;
+  bottom: 0;
+  height: auto;
+  background: #ffffff;
+  width: 280px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
+  margin-bottom: 10px;
+  overflow-x: scroll;
+}
+
+nav .fas {
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.nav-item {
+  position: relative;
+  top: 12px;
+  margin-left: 10px;
+}
+
+
+.logo {
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.logo span {
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+a {
+  position: relative;
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: table;
+  width: 280px;
+  padding: 10px;
+}
+
+
+a:hover {
+  background: #eee;
+}
+
+.logout {
+  position: relative;
+  bottom: 0;
+}
+
+/*Nav Bar close*/
+
+
+/* CSS styles */
+
+h2 {
+  text-align: right;
+  font-size: 37px;
+  font-family:serif;
+  margin-top: 50px;
+  margin-right: 450px;
+  /* margin-left: 500px; */
+}
+
+.input-box {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select,
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  margin-left: 1000px;
+}
+
+/* .table-container {
+  overflow-x: auto;
+} */
+
+table {
+  width: 1100px;
+  border-collapse: collapse;
+  margin-top: 50px;
+  margin-left: 330px;
+  margin-right: 50px;
+}
+
+th,td {
+  border: 2px solid #0000009c;
+  padding: 8px;
+  text-align: center;
+}
+
+thead {
+  background-color: #f5f5f5;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+th {
+background-color: #299797;
+}
+
+tr:hover {
+background-color: #2c5fd6;
+}
+
+.dropdown-container{
+  width: 450px;
+  margin-left: -20px;
+  margin-right: 0px;
+}
+
+/* For screens up to 768px (typical mobile devices) */
+@media screen and (max-width: 768px) {
+  nav {
+      width: 250px; 
+  }
+
+  h2{
+    margin-left: 280px;
+  }
+
+  .dropdown-container{
+    width: 350px;
+    margin-left: -720px;
+  }
+
+  .table{
+    margin-left: -50px;
+  }
+}

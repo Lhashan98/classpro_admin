@@ -1,0 +1,6 @@
+.top-space {
+  margin-top: 65px;
+}
+.main {
+  padding-top: 100px; /* Add padding to prevent overlap with the fixed header */
+}

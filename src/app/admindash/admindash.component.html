@@ -1,0 +1,114 @@
+<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard | By Code Info</title>
+    
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  </head>
+  <div class="container">
+
+    <nav>
+      <ul>
+        <li><a href="" routerLink="/admindash" class="logo">
+          <img src="assets/image/logo.png" alt="">
+          <span class="nav-item">DashBoard</span>
+        </a></li>
+        <li><a href="#" routerLink="/request">
+          <i class="fas fa-home"></i>
+          <span class="nav-item" >Request</span>
+        </a></li>
+        <li><a href="" routerLink="/addcordinator">
+          <i class="fas fa-user"></i>
+          <span class="nav-item">Register Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/cordinators">
+          <i class="fas fa-users"></i>
+          <span class="nav-item">Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/addnewclass">
+          <i class="fas fa-edit"></i>
+          <span class="nav-item">Update Classrooms</span>
+        </a></li>
+        <li><a href="" routerLink="/viewclass">
+          <i class="fas fa-chart-bar"></i>
+          <span class="nav-item">View Class</span>
+        </a></li>
+        <li><a href="" routerLink="/availableclasses">
+          <i class="fas fa-tasks"></i>
+          <span class="nav-item">Available classes</span>
+        </a></li>
+        <li><a href="" routerLink="/reports">
+          <i class="fas fa-wallet"></i>
+          <span class="nav-item">Reports</span>
+        </a></li>
+        <!-- <li><a href="">
+          <i class="fas fa-cog"></i>
+          <span class="nav-item">Settings</span>
+        </a></li> -->
+        <li><a href="" routerLink="/checktimetable">
+          <i class="fas fa-clock"></i>
+          <span class="nav-item">Time Table</span>
+        </a></li>
+     
+        <li><a href="" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="nav-item">Log out</span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>  
+  
+  <section class="main">
+    <div class="main-top">
+          
+          <!-- <div class="pie" style="--p:20"> 20%</div> -->
+        <!-- <div class="pie" style="--p:40;--c:darkblue;--b:10px"> 40%</div>
+        <div class="pie no-round" style="--p:60;--c:purple;--b:15px"> 60%</div> -->
+
+        <!-- <div class="main-top">
+          <p>Find ClassRoom</p>
+        </div> -->
+        
+        <h1>Find ClassRoom</h1>
+        
+        <!-- <div class="search_bar">
+          <input type="search" placeholder="Search ClassRoom here...">
+          <select name="" id="">
+            <option>All</option>
+            <option>Booked</option>
+            <option>Available</option>
+            <option>Request</option>
+          </select>
+          
+          <a href="" class="filter">Search</a>
+        </div> -->
+       
+
+        <!-- <div class="row">
+          <p>There are <span>00</span> ClassRooms</p>
+          <a href="#">See all</a>
+        </div> -->
+  
+        <div class="job_card"  *ngFor="let Building of BuildingArray">
+          <div class="job_details">
+            
+            <div class="text">
+              <h2>{{ Building.buildingname }}</h2>
+              <span>{{ Building.ClassNumber }}</span>
+            </div>
+          </div>
+          <div class="job_salary">
+            <h4>Student Capacity:-{{ Building.capacity }}</h4>
+            <h4>{{ Building.ClassType }}</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="pie animate no-round" style="--p:80;--c:blue;"> 80% </div>
+        <div class="pie animate" style="--p:90;--c:lightblue"> 90% </div> -->
+
+  </section>
+
+  </html></span>

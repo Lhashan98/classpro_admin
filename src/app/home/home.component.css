@@ -1,0 +1,90 @@
+/* Apply basic styles to your container */
+.container {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto; /* Center the container */
+  max-width: 1200px; /* Limit container width */
+}
+
+/* Style the heading inside the container */
+h1 {
+  color: #333;
+  font-size: 56px;
+  text-align: center; /* Center the heading */
+  margin-bottom: 5px; 
+  margin-top: -20px;
+}
+
+/* Style the login button inside the container */
+.login-btn {
+  background-color: rgb(20, 48, 128);
+  color: #fff;
+  padding: 15px 30px; /* Adjust padding */
+  cursor: pointer;
+  font-size: 19px;
+  border: none;
+  border-radius: 10px;
+  display: block; /* Make the button a block element */
+  margin: 20px auto; /* Center the button horizontally and reduce vertical margin */
+}
+
+/* Apply styles to the outer image container */
+.container_outer_img {
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center; /* Center the image */
+  margin-bottom: 5px;
+}
+
+/* Responsive image styling */
+.container_outer_img img {
+  max-width: 100%; /* Set maximum width for responsiveness */
+  height: auto; /* Maintain aspect ratio */
+  display: inline-block; /* Ensure inline display */
+  margin-top: 5px;
+}
+
+.img-inner {
+  float: none; /* Remove float */
+  margin: 0 auto 30px; /* Center the image container and add margin-bottom */
+  width: 80%; /* Adjust width */
+}
+
+.body{
+  overflow: auto;
+  margin-bottom: -600px;
+}
+
+/* Media queries for responsive design */
+/* For screens up to 600px (mobile) */
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 2.5rem; /* Decrease font size for smaller screens */
+  }
+
+  .login-btn {
+    width: 100%; /* Make the login button take full width */
+  }
+}
+
+/* For screens between 601px and 1024px (tablets) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  h1 {
+    font-size: 3rem; /* Adjust font size for tablets */
+  }
+
+  .login-btn {
+    width: 50%; /* Adjust button width for tablets */
+  }
+}
+
+/* For screens larger than 1024px (desktops) */
+@media only screen and (min-width: 1025px) {
+  h1 {
+    font-size: 4rem; /* Adjust font size for desktop screens */
+  }
+
+  .login-btn {
+    width: 25%; /* Adjust button width for desktop screens */
+  }
+}

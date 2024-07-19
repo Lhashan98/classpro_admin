@@ -1,0 +1,29 @@
+.toolbar {
+  position: fixed; /* Changed from absolute to fixed */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  background-color: #05007D;
+  color: white;
+  font-weight: 600;
+  z-index: 1000; /* Ensure the header stays on top of other content */
+}
+
+.toolbar img {
+  margin: 0 16px;
+  height: 65px;
+  width: 170px;
+}
+
+.toolbar #twitter-logo {
+  height: 40px;
+  margin: 0 8px;
+}
+
+.toolbar #twitter-logo:hover,
+.toolbar #youtube-logo:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,156 @@
+<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard | By Code Info</title>
+    
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  </head>
+
+  <div class="container">
+
+    <nav>
+      <ul>
+        <li><a href="" routerLink="/admindash" class="logo">
+          <img src="assets/image/logo.png" alt="">
+          <span class="nav-item">DashBoard</span>
+        </a></li>
+        <li><a href="#" routerLink="/request">
+          <i class="fas fa-home"></i>
+          <span class="nav-item" >Request</span>
+        </a></li>
+        <li><a href="" routerLink="/addcordinator">
+          <i class="fas fa-user"></i>
+          <span class="nav-item">Register Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/cordinators">
+          <i class="fas fa-users"></i>
+          <span class="nav-item">Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/addnewclass">
+          <i class="fas fa-edit"></i>
+          <span class="nav-item">Update Classrooms</span>
+        </a></li>
+        <li><a href="" routerLink="/viewclass">
+          <i class="fas fa-chart-bar"></i>
+          <span class="nav-item">View Class</span>
+        </a></li>
+        <li><a href="" routerLink="/availableclasses">
+          <i class="fas fa-tasks"></i>
+          <span class="nav-item">Available classes</span>
+        </a></li>
+        <li><a href="" routerLink="/reports">
+          <i class="fas fa-wallet"></i>
+          <span class="nav-item">Reports</span>
+        </a></li>
+        <!-- <li><a href="">
+          <i class="fas fa-cog"></i>
+          <span class="nav-item">Settings</span>
+        </a></li> -->
+        <li><a href="" routerLink="/checktimetable">
+          <i class="fas fa-clock"></i>
+          <span class="nav-item">Time Table</span>
+        </a></li>
+     
+        <li><a href="" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="nav-item">Log out</span>
+        </a></li>
+      </ul>
+    </nav>
+  </div> 
+            
+<!-- Nav Bar close -->
+
+
+
+<div class="timetable-header">
+  <!-- Timetable topic -->
+<h2>Timetable</h2>
+
+<div class="dropdown-container">
+  <!-- Dropdown menu for batch -->
+  <div class="dropdown">
+    <select [(ngModel)]="selectedBatch" (change)="filterByBatch()">
+      <option value="">All Batches</option>
+      <option *ngFor="let batch of batchOptions" [value]="batch">{{ batch }}</option>
+    </select>
+  </div>
+
+  <!-- Dropdown menu for building -->
+  <div class="dropdown">
+    <select [(ngModel)]="selectedBuilding" (change)="filterByBuilding()">
+      <option value="">All Buildings</option>
+      <option *ngFor="let building of buildingOptions" [value]="building">{{ building }}</option>
+    </select>
+  </div>
+
+
+  <div class="dropdown">
+    <select [(ngModel)]="selectedDay" (change)="filterByDay()">
+      <option value="">All Days</option>
+      <option *ngFor="let day of dayOptions" [value]="day">{{ day }}</option>
+    </select>
+  </div>
+
+  <div class="dropdown">
+    <select [(ngModel)]="selectedDepartment" (change)="filterByDepartment()">
+      <option value="">All Departments</option>
+      <option *ngFor="let department of departmentOptions" [value]="department">{{ department }}</option>
+    </select>
+  </div>
+
+  <div class="dropdown">
+    <select [(ngModel)]="selectedCourse" (change)="filterByCourses()"> <!-- Fix the typo here -->
+      <option value="">All Courses</option>
+      <option *ngFor="let course of courseOptions" [value]="course">{{ course }}</option>
+    </select>
+  </div>
+
+</div>
+
+
+<!-- Table -->
+
+
+  <button class="download-button" (click)="downloadAsPDF()">Download as PDF</button>
+
+<div class="table">
+
+  <table #tableToExport>
+    <thead>
+      <tr>
+        <th>Department</th>
+        <th>Course</th>
+        <th>Name of Building</th>
+        <th>Class</th>
+        <th>Capacity</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Batch</th>
+        <th>Date</th>
+        <th>Day</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredData">
+        <td>{{ item.department }}</td>
+        <td>{{ item.course }}</td>
+        <td>{{ item.nameofbuilding }}</td>
+        <td>{{ item.ClassNumber }}</td>
+        <td>{{ item.capacity }}</td>
+        <td>{{ item.starttime }}</td>
+        <td>{{ item.endtime }}</td>
+        <td>{{ item.batch }}</td>
+        <td>{{ item.requestdate }}</td>
+        <td>{{ getDayType(item.requestdate) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+ 

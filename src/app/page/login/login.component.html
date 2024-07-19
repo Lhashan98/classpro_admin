@@ -1,0 +1,31 @@
+<a routerLink="/" class="back-button">Back</a>
+
+<div class="body">
+    <h1 align="center">Welcome to ClassPro</h1>
+
+    <div class="container_outer_img">
+      <div class="img-inner">
+        <img src="assets/image/Homepage.jpg" alt="My Logo" class="responsive"/>
+      </div>
+    </div>
+
+    <div class="login-container">
+
+      <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" [(ngModel)]="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" [(ngModel)]="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="login_btn">LOGIN</button>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+      </form>
+
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard | By Code Info</title>
+    
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  </head>
+
+    
+  <div class="container">
+
+    <nav>
+      <ul>
+        <li><a href="" routerLink="/admindash" class="logo">
+          <img src="assets/image/logo.png" alt="">
+          <span class="nav-item">DashBoard</span>
+        </a></li>
+        <li><a href="#" routerLink="/request">
+          <i class="fas fa-home"></i>
+          <span class="nav-item" >Request</span>
+        </a></li>
+        <li><a href="" routerLink="/addcordinator">
+          <i class="fas fa-user"></i>
+          <span class="nav-item">Register Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/cordinators">
+          <i class="fas fa-users"></i>
+          <span class="nav-item">Coordinators</span>
+        </a></li>
+        <li><a href="" routerLink="/addnewclass">
+          <i class="fas fa-edit"></i>
+          <span class="nav-item">Update Classrooms</span>
+        </a></li>
+        <li><a href="" routerLink="/viewclass">
+          <i class="fas fa-chart-bar"></i>
+          <span class="nav-item">View Class</span>
+        </a></li>
+        <li><a href="" routerLink="/availableclasses">
+          <i class="fas fa-tasks"></i>
+          <span class="nav-item">Available classes</span>
+        </a></li>
+        <li><a href="" routerLink="/reports">
+          <i class="fas fa-wallet"></i>
+          <span class="nav-item">Reports</span>
+        </a></li>
+        <!-- <li><a href="">
+          <i class="fas fa-cog"></i>
+          <span class="nav-item">Settings</span>
+        </a></li> -->
+        <li><a href="" routerLink="/checktimetable">
+          <i class="fas fa-clock"></i>
+          <span class="nav-item">Time Table</span>
+        </a></li>
+     
+        <li><a href="" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="nav-item">Log out</span>
+        </a></li>
+      </ul>
+    </nav>
+  </div> 
+    
+            
+<!-- Nav Bar close -->
+
+<!-- timetable.component.html -->
+<!-- availableclass.component.html -->
+
+<section class="main">
+  <!-- <div class="main-top"> -->
+    <form align="center" (submit)="save()">
+      <h3>Add New Batch for {{ department }}</h3>
+      <h1 align="center">Find Class Room</h1>
+
+      <label for="capacity">Capacity:</label>
+      <input
+        type="number"
+        [(ngModel)]="capacity"
+        [ngModelOptions]="{ standalone: true }"
+        (input)="filterClassrooms()"
+        required
+      />
+
+      <label for="availablebuilding">Name of building:</label>
+      <select
+        id="availablebuilding"
+        [(ngModel)]="nameofbuilding"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="filterClassroomsByBuilding(nameofbuilding)"
+        required
+      >
+        <option value="" disabled selected>Select a building</option>
+        <option
+          *ngFor="
+            let group of groupBy(filteredClassrooms, 'buildingname')
+              | keyvalue
+          "
+          [value]="group.key"
+        >
+          {{ group.key }}
+        </option>
+      </select>
+
+      <label for="typeofclass">Type of class:</label>
+      <select
+        [(ngModel)]="typeofclass"
+        [ngModelOptions]="{ standalone: true }"
+        required
+        (change)="filterclassroomsByType()"
+      >
+        <option value="Computer Lab">Computer Lab</option>
+        <option value="class T">class T</option>
+        <option value="class C">class C</option>
+        <option value="Simulator">Simulator</option>
+      </select>
+
+      <div class="input-box">
+        <label for="requestdate">Date:</label>
+        <input
+          type="date"
+          [(ngModel)]="requestdate"
+          [ngModelOptions]="{ standalone: true }"
+          required
+          (input)="filterclassroomsByTime()"
+        />
+      </div>
+
+      <div class="input-box">
+        <label for="starttime">Start Time:</label>
+        <input
+          type="time"
+          [(ngModel)]="starttime"
+          [ngModelOptions]="{ standalone: true }"
+          required
+          (input)="filterclassroomsByTime()"
+        />
+        <label for="endtime">End Time:</label>
+        <input
+          type="time"
+          [(ngModel)]="endtime"
+          [ngModelOptions]="{ standalone: true }"
+          required
+          (input)="filterclassroomsByTime()"
+        />
+      </div>
+
+      <label for="availableclass">Available Class:</label>
+      <select
+        id="availableclass"
+        [(ngModel)]="selectedavailableclass"
+        [ngModelOptions]="{ standalone: true }"
+        required
+      >
+        <option value="" disabled selected>Select a class</option>
+        <option
+          *ngFor="let class of filteredClassroomsForAvailable"
+          [value]="class._id"
+        >
+          {{ class.ClassNumber }}
+        </option>
+      </select>
+    </form>
+
+</section>

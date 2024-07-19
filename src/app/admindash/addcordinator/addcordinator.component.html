@@ -1,0 +1,107 @@
+<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard | By Code Info</title>
+    
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+
+      <nav>
+        <ul>
+          <li><a href="" routerLink="/admindash" class="logo">
+            <img src="assets/image/logo.png" alt="">
+            <span class="nav-item">DashBoard</span>
+          </a></li>
+          <li><a href="#" routerLink="/request">
+            <i class="fas fa-home"></i>
+            <span class="nav-item" >Request</span>
+          </a></li>
+          <li><a href="" routerLink="/addcordinator">
+            <i class="fas fa-user"></i>
+            <span class="nav-item">Register Coordinators</span>
+          </a></li>
+          <li><a href="" routerLink="/cordinators">
+            <i class="fas fa-users"></i>
+            <span class="nav-item">Coordinators</span>
+          </a></li>
+          <li><a href="" routerLink="/addnewclass">
+            <i class="fas fa-edit"></i>
+            <span class="nav-item">Update Classrooms</span>
+          </a></li>
+          <li><a href="" routerLink="/viewclass">
+            <i class="fas fa-chart-bar"></i>
+            <span class="nav-item">View Class</span>
+          </a></li>
+          <li><a href="" routerLink="/availableclasses">
+            <i class="fas fa-tasks"></i>
+            <span class="nav-item">Available classes</span>
+          </a></li>
+          <li><a href="" routerLink="/reports">
+            <i class="fas fa-wallet"></i>
+            <span class="nav-item">Reports</span>
+          </a></li>
+          <!-- <li><a href="">
+            <i class="fas fa-cog"></i>
+            <span class="nav-item">Settings</span>
+          </a></li> -->
+          <li><a href="" routerLink="/checktimetable">
+            <i class="fas fa-clock"></i>
+            <span class="nav-item">Time Table</span>
+          </a></li>
+       
+          <li><a href="" class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="nav-item">Log out</span>
+          </a></li>
+        </ul>
+      </nav>
+    </div>
+  <!-- Nav Bar close -->
+
+
+<!--     
+        <section class="main">
+          <div class="main-top">
+ -->
+
+
+<div class="wrapper">
+    <h2>Register Coordinator</h2>
+    <form action="#" method="post" class="formtag"  (submit)="save()">
+        <div class="input-box">
+            <label for="employee-number">Employee Number</label>
+            <input type="text" [(ngModel)]="enumber" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        <div class="input-box">
+            <label for="name">Enter Name</label>
+            <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"  required>
+        </div>
+        <div class="input-box">
+            <label for="email">Email Address</label>
+            <input type="email"  [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        <div class="input-box">
+            <label for="department">Enter Department</label>
+            <input type="text"  [(ngModel)]="department" [ngModelOptions]="{standalone: true}"required>
+        </div>
+        <div class="input-box">
+            <label for="telephone">Telephone Number</label>
+            <input type="tel"  [(ngModel)]="telephone" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        <div class="input-box">
+          <label for="telephone">Password</label>
+          <input type="pass"  [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
+      </div><br><br>
+        <div class="input-box button">
+            <input type="submit" value="Register Now">
+        </div>
+    </form>
+    
+</div>
+
+
+
