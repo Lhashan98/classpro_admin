@@ -1,151 +1,131 @@
-<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard | By Code Info</title>
-    
-    <!-- Font Awesome Cdn Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-  </head>
-  <div class="container">
-
-    <nav>
-      <ul>
-        <li><a href="" routerLink="/admindash" class="logo">
-          <img src="assets/image/logo.png" alt="">
-          <span class="nav-item">DashBoard</span>
-        </a></li>
-        <li><a href="#" routerLink="/request">
-          <i class="fas fa-home"></i>
-          <span class="nav-item" >Request</span>
-        </a></li>
-        <li><a href="" routerLink="/addcordinator">
-          <i class="fas fa-user"></i>
-          <span class="nav-item">Register Coordinators</span>
-        </a></li>
-        <li><a href="" routerLink="/cordinators">
-          <i class="fas fa-users"></i>
-          <span class="nav-item">Coordinators</span>
-        </a></li>
-        <li><a href="" routerLink="/addnewclass">
-          <i class="fas fa-edit"></i>
-          <span class="nav-item">Update Classrooms</span>
-        </a></li>
-        <li><a href="" routerLink="/viewclass">
-          <i class="fas fa-chart-bar"></i>
-          <span class="nav-item">View Class</span>
-        </a></li>
-        <li><a href="" routerLink="/availableclasses">
-          <i class="fas fa-tasks"></i>
-          <span class="nav-item">Available classes</span>
-        </a></li>
-        <li><a href="" routerLink="/reports">
-          <i class="fas fa-wallet"></i>
-          <span class="nav-item">Reports</span>
-        </a></li>
-        <!-- <li><a href="">
-          <i class="fas fa-cog"></i>
-          <span class="nav-item">Settings</span>
-        </a></li> -->
-        <li><a href="" routerLink="/checktimetable">
-          <i class="fas fa-clock"></i>
-          <span class="nav-item">Time Table</span>
-        </a></li>
-     
-        <li><a href="" class="logout">
-          <i class="fas fa-sign-out-alt"></i>
-          <span class="nav-item">Log out</span>
-        </a></li>
-      </ul>
-    </nav>
-  </div>
-<!-- Nav Bar close -->
-     
-
-<!-- Request Page open -->
-  <!-- <div class="wrapper">
-      <h2>Requests</h2> -->
-      <!-- Add your form here -->
-      <!-- <form action="#">
-        <div class="filter-box">
-            <label for="departmentFilter">Select Department:</label>
-            <select id="departmentFilter" name="departmentFilter">
-                <option value="all">All Departments</option>
-                <option value="it">IT</option>
-                <option value="hr">Helth Science</option> -->
-                <!-- Add other departments as needed -->
-            <!-- </select>
-        </div>
-          <div class="input-box button">
-              <input type="submit" value="Done">
-          </div> -->
-      <!-- </form> 
-    </div>-->
-
-
-    <div class="container1">
-        <div class="dropdown">
-          <select [(ngModel)]="selectedState" (change)="applyFilter()">
-            <option value="">All</option>
-            <option value="accepted">Accepted</option>
-            <option value="pending">Pending</option>
-          </select>
-        </div>
-      
-        <table>
-          <thead>
-            <tr>
-              <th>Department</th>
-              <th>Course</th>
-              <th>Module</th>
-              <th>Batch</th>
-              <th>Capacity</th>
-              <th>Name of Building</th>
-              <th>Type of class</th>
-              <th>Date</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Available Class</th>
-              <th>State</th>
-              <th>Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let report of filteredReports">
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.department }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.course }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.module }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.batch }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.capacity }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.nameofbuilding }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.typeofclass }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.requestdate }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.starttime }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.endtime }}</td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">
-                <ng-container *ngIf="!report.editing; else editField">
-                  {{ report.ClassNumber }}
-                  <button [disabled]="isEditEnabled && filteredClassroomsForAvailable.length" type="button" class="edit" (click)="toggleEditing(report)">Edit</button>
-                </ng-container>
-                <ng-template #editField>
-                  <select [(ngModel)]="selecteClassId">
-                    <option *ngFor="let item of filteredClassroomsForAvailable" [value]="item._id">{{ item.ClassNumber }}</option>
-                  </select>
-                  <button type="button" class="submit" (click)="submitEdit(report)">Submit</button>
-                </ng-template>
-              </td>
-              <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">
-                <button *ngIf="report.State !== 'accepted'" type="button" class="update-state" (click)="updateState(report)">Accept</button>
-                <span *ngIf="report.State === 'accepted'" class="checkmark">&#10004;</span>
-              </td>
-              <td>
-                <button type="button" class="delete" (click)="deleteReport(report)">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-      
-      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard | By Code Info</title>
   
+  <!-- Font Awesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+</head>
+<div class="container">
 
+  <nav>
+    <ul>
+      <li><a href="" routerLink="/admindash" class="logo">
+        <img src="assets/image/logo.png" alt="">
+        <span class="nav-item">DashBoard</span>
+      </a></li>
+      <li><a href="#" routerLink="/request">
+        <i class="fas fa-home"></i>
+        <span class="nav-item" >Request</span>
+      </a></li>
+      <li><a href="" routerLink="/addcordinator">
+        <i class="fas fa-user"></i>
+        <span class="nav-item">Register Coordinators</span>
+      </a></li>
+      <li><a href="" routerLink="/cordinators">
+        <i class="fas fa-users"></i>
+        <span class="nav-item">Coordinators</span>
+      </a></li>
+      <li><a href="" routerLink="/addnewclass">
+        <i class="fas fa-edit"></i>
+        <span class="nav-item">Update Classrooms</span>
+      </a></li>
+      <li><a href="" routerLink="/viewclass">
+        <i class="fas fa-chart-bar"></i>
+        <span class="nav-item">View Class</span>
+      </a></li>
+      <li><a href="" routerLink="/availableclasses">
+        <i class="fas fa-tasks"></i>
+        <span class="nav-item">Available classes</span>
+      </a></li>
+      <li><a href="" routerLink="/reports">
+        <i class="fas fa-wallet"></i>
+        <span class="nav-item">Reports</span>
+      </a></li>
+      <!-- <li><a href="">
+        <i class="fas fa-cog"></i>
+        <span class="nav-item">Settings</span>
+      </a></li> -->
+      <li><a href="" routerLink="/checktimetable">
+        <i class="fas fa-clock"></i>
+        <span class="nav-item">Time Table</span>
+      </a></li>
+   
+      <li><a href="" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span class="nav-item">Log out</span>
+      </a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class="container1">
+  <div class="row custom-row">
+    <span class="col custom-col">
+      <select id="departmentFilter" [(ngModel)]="selectedDepartment" (change)="filterReports()">
+        <option value="all">All Departments</option>
+        <option *ngFor="let department of uniqueDepartments" [value]="department">{{ department }}</option>
+      </select>
+  
+      <select [(ngModel)]="selectedState" (change)="filterReports()">
+        <option value="">All</option>
+        <option value="accepted">Accepted</option>
+        <option value="pending">Pending</option>
+      </select>
+    </span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Department</th>
+        <th>Course</th>
+        <th>Module</th>
+        <th>Batch</th>
+        <th>Capacity</th>
+        <th>Name of Building</th>
+        <th>Type of class</th>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Available Class</th>
+        <th>State</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of filteredReports">
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.department }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.course }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.module }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.batch }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.capacity }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.nameofbuilding }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.typeofclass }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.requestdate }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.starttime }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.endtime }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">
+          <ng-container *ngIf="!report.editing; else editField">
+            {{ report.ClassNumber }}
+            <button [disabled]="isEditEnabled && filteredClassroomsForAvailable.length" type="button" class="edit" (click)="toggleEditing(report)">Edit</button>
+          </ng-container>
+          <ng-template #editField>
+            <select [(ngModel)]="selecteClassId">
+              <option *ngFor="let item of filteredClassroomsForAvailable" [value]="item._id">{{ item.ClassNumber }}</option>
+            </select>
+            <button type="button" class="submit" (click)="submitEdit(report)">Submit</button>
+          </ng-template>
+        </td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">
+          <button *ngIf="report.State !== 'accepted'" type="button" class="update-state" (click)="updateState(report)">Accept</button>
+          <span *ngIf="report.State === 'accepted'" class="checkmark">&#10004;</span>
+        </td>
+        <td>
+          <button type="button" class="delete" (click)="deleteReport(report)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

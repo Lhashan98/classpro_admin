@@ -28,33 +28,18 @@ interface Report {
   styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
-applyFilter() {
-throw new Error('Method not implemented.');
-}
+
   private apiUrl = 'http://5.181.217.67:8002/addreport/getAll';
 
   public reports: Report[] = [];
-  public searchTerm = '';
-  public department = '';
-  public course = '';
-  public module = '';
-  public batch = '';
-  public capacity = '';
-  public nameofbuilding = '';
-  public typeofclass = '';
-  public requestdate = '';
-  public starttime = '';
-  public endtime = '';
-  public availableclass = '';
-  public State = '';
-  public selectedBatch = '';
-  public selectedBuilding = '';
-  public uniqueBatches: string[] = [];
-  public uniqueBuildings: string[] = [];
-  public filteredClassroomsForAvailable: any[] = [];
-  public selecteClassId = '';
+  public uniqueDepartments: string[] = [];
+  public filteredReports: Report[] = [];
+  public selectedDepartment = 'all';
+  public selectedState = '';
+
   public isEditEnabled = false;
-  public selectedState = ''; // Add this line to define selectedState property
+  public selecteClassId = '';
+  public filteredClassroomsForAvailable: any[] = [];
 
   constructor(
     private http: HttpClient,
@@ -66,10 +51,6 @@ throw new Error('Method not implemented.');
   ) {}
 
   ngOnInit(): void {
-    this.department = this.cookieService.get('department');
-    this.route.params.subscribe(params => {
-      this.department = params['department'] || this.department;
-    });
     this.getReports();
   }
 
@@ -78,6 +59,8 @@ throw new Error('Method not implemented.');
       (response) => {
         if (response.data) {
           this.reports = response.data;
+          this.uniqueDepartments = [...new Set(this.reports.map(report => report.department))];
+          this.filteredReports = this.reports;
         }
       },
       (error) => {
@@ -86,24 +69,19 @@ throw new Error('Method not implemented.');
     );
   }
 
+  filterReports(): void {
+    this.filteredReports = this.reports.filter(report => {
+      const matchesDepartment = this.selectedDepartment === 'all' || report.department === this.selectedDepartment;
+      const matchesState = !this.selectedState || report.State === this.selectedState;
+      return matchesDepartment && matchesState;
+    });
+  }
+
   deleteReport(data: Report): void {
     this.http.delete(`http://5.181.217.67:8002/addreport/delete/${data._id}`).subscribe((resultData: any) => {
       console.log(resultData);
       alert('Request Deleted');
-    });
-  }
-
-  get filteredReports() {
-    return this.reports.filter(report => {
-      // Check if searchTerm is included in any report property
-      const includesSearchTerm = Object.values(report).some(val =>
-        val && typeof val === 'string' && val.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-  
-      // Check if the selectedState matches the report's state or if no state is selected
-      const matchesState = !this.selectedState || report.State === this.selectedState;
-  
-      return includesSearchTerm && matchesState;
+      this.getReports(); // Refresh reports after deletion
     });
   }
 
@@ -125,7 +103,7 @@ throw new Error('Method not implemented.');
   async toggleEditing(report: Report) {
     this.isEditEnabled = true;
     report.editing = !report.editing;
-    await this.getAllAvailableClasses(report);
+
   }
 
   async submitEdit(report: Report) {
@@ -146,44 +124,9 @@ throw new Error('Method not implemented.');
             this.getReports();
           },
           (error) => {
-            console.error('Error updating report Class:', error);
+            console.error('Error updating report class:', error);
           }
         );
-      this.isEditEnabled = false;
     }
-  }
-
-  getAllAvailableClasses(report: Report) {
-    const requestBody = {
-      capacity: report.capacity,
-      buildingname: report.nameofbuilding,
-      ClassType: report.typeofclass
-    };
-
-    this.http.post("http://5.181.217.67:8002/addclass/getSpecificClass", requestBody)
-      .subscribe((resultData: any) => {
-        console.log(resultData);
-        this.filterClassroomsByTime(resultData.data);
-      });
-  }
-
-  async filterClassroomsByTime(data: any[]) {
-    const filteredClassrooms: any[] = [];
-    this.filteredClassroomsForAvailable = [];
-    for (const classroom of data) {
-      await this.addReportService
-        .getReportsByClassId({
-          availableclass: classroom._id,
-          requestdate: this.requestdate,
-          starttime: this.starttime,
-          endtime: this.endtime,
-        })
-        .subscribe((res: any) => {
-          if (res.date?.length === 0) {
-            filteredClassrooms.push(classroom);
-          }
-        });
-    }
-    this.filteredClassroomsForAvailable = filteredClassrooms;
   }
 }
