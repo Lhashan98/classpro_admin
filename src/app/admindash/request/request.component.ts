@@ -40,6 +40,9 @@ export class RequestComponent implements OnInit {
   public isEditEnabled = false;
   public selecteClassId = '';
   public filteredClassroomsForAvailable: any[] = [];
+  requestdate: any;
+  starttime: any;
+  endtime: any;
 
   constructor(
     private http: HttpClient,
@@ -100,13 +103,51 @@ export class RequestComponent implements OnInit {
       );
   }
 
+   getAllAvailableClasses(report: Report) {
+    const requestBody = {
+      capacity: report.capacity,
+      buildingname: report.nameofbuilding,
+      ClassType: report.typeofclass
+    };
+
+    this.http.post("http://5.181.217.67:8002/addclass/getSpecificClass", requestBody)
+      .subscribe((resultData: any) => {
+        console.log(resultData);
+        this.filterClassroomsByTime(resultData.data);
+      });
+  }
+
+
+  async filterClassroomsByTime(data: any[]) {
+    const filteredClassrooms: any[] = [];
+    this.filteredClassroomsForAvailable = [];
+    for (const classroom of data) {
+      await this.addReportService
+        .getReportsByClassId({
+          availableclass: classroom._id,
+          requestdate: this.requestdate,
+          starttime: this.starttime,
+          endtime: this.endtime,
+        })
+        .subscribe((res: any) => {
+          if (res.date?.length === 0) {
+            filteredClassrooms.push(classroom);
+          }
+        });
+    }
+    this.filteredClassroomsForAvailable = filteredClassrooms;
+  }
+
   async toggleEditing(report: Report) {
     this.isEditEnabled = true;
     report.editing = !report.editing;
+    await this.getAllAvailableClasses(report);
 
   }
 
   async submitEdit(report: Report) {
+    this.isEditEnabled = false;
+    report.editing = !report.editing;
     const selectedClass = this.filteredClassroomsForAvailable.find(item => item._id === this.selecteClassId);
     console.log('Selected class:', selectedClass);
     

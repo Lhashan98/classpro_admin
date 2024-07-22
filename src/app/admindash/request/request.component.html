@@ -96,29 +96,29 @@
     </thead>
     <tbody>
       <tr *ngFor="let report of filteredReports">
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.department }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.course }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.module }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.batch }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.capacity }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.nameofbuilding }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.typeofclass }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.requestdate }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.starttime }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">{{ report.endtime }}</td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.department }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.course }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.module }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.batch }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.capacity }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.nameofbuilding }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.typeofclass }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.requestdate }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.starttime }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">{{ report.endtime }}</td>
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">
           <ng-container *ngIf="!report.editing; else editField">
             {{ report.ClassNumber }}
             <button [disabled]="isEditEnabled && filteredClassroomsForAvailable.length" type="button" class="edit" (click)="toggleEditing(report)">Edit</button>
           </ng-container>
+
           <ng-template #editField>
-            <select [(ngModel)]="selecteClassId">
-              <option *ngFor="let item of filteredClassroomsForAvailable" [value]="item._id">{{ item.ClassNumber }}</option>
-            </select>
+            <select [(ngModel)]="selecteClassId" class="selectClassId">
+              <option *ngFor="let item of filteredClassroomsForAvailable" [value]="item._id">{{ item.ClassNumber }}</option>     </select>
             <button type="button" class="submit" (click)="submitEdit(report)">Submit</button>
           </ng-template>
         </td>
-        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#90EE90' : 'inherit'}">
+        <td [ngStyle]="{'background-color': report.State === 'accepted' ? '#f9f9f9' : 'inherit'}">
           <button *ngIf="report.State !== 'accepted'" type="button" class="update-state" (click)="updateState(report)">Accept</button>
           <span *ngIf="report.State === 'accepted'" class="checkmark">&#10004;</span>
         </td>

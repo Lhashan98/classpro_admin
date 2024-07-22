@@ -113,30 +113,59 @@ export class TimetableComponent implements OnInit {
 
 
 
-  downloadAsPDF(): void {
-    const doc = new jsPDF();
-    const table = this.tableToExport.nativeElement;
+  
+downloadAsPDF(): void {
+  const doc = new jsPDF();
+  const table = this.tableToExport.nativeElement;
+  
+  // Extract dates from table data
+  const dates = this.filteredData.map(item => item.requestdate);
+  const firstDate = new Date(Math.min.apply(null, dates.map(date => new Date(date).getTime())));
+  const lastDate = new Date(Math.max.apply(null, dates.map(date => new Date(date).getTime())));
+  
+  // Format dates
+  const formattedFirstDate = `${firstDate.getDate()}.${firstDate.getMonth() + 1}.${firstDate.getFullYear()}`;
+  const formattedLastDate = `${lastDate.getDate()}.${lastDate.getMonth() + 1}.${lastDate.getFullYear()}`;
+  
+  // Add title
+  doc.setFontSize(16);
+  const title = 'Timetable';
+  doc.text(title, 105, 20, { align: 'center' });
 
-    html2canvas(table).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const imgWidth = 210;
-      const pageHeight = 295;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
+  // Add date range below the title with smaller font size
+  doc.setFontSize(12);
+  const dateRange = `${formattedFirstDate} to ${formattedLastDate}`;
+  doc.text(dateRange, 105, 30, { align: 'center' });
 
-      let position = 0;
 
-      doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+  html2canvas(table).then((canvas) => {
+    const imgData = canvas.toDataURL('image/png');
+    const pageWidth = 210; // Width of A4 in mm
+    const pageHeight = 295; // Height of A4 in mm
+    const marginPx = 95; // Margin in px (100px on all sides)
+    const marginMm = marginPx / 3.83465; // Convert px to mm
 
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        doc.addPage();
-        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
+    // Calculate image dimensions with margins
+    const imgWidth = pageWidth - 2 * marginMm;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let heightLeft = imgHeight;
+    let position = marginMm + 10; // Position below title
 
-      doc.save('timetable.pdf');
-    });
-  }
+    doc.addImage(imgData, 'PNG', marginMm, position, imgWidth, imgHeight);
+
+    heightLeft -= pageHeight - 2 * marginMm;
+
+    while (heightLeft > 0) {
+      doc.addPage();
+      position = marginMm + 10; // Position below title
+
+      doc.addImage(imgData, 'PNG', marginMm, position - imgHeight, imgWidth, imgHeight);
+      heightLeft -= pageHeight - 2 * marginMm;
+    }
+
+    // Save file with dates in the name
+    const filename = `timetable ${formattedFirstDate} to ${formattedLastDate}.pdf`;
+    doc.save(filename);
+  });
+}
 }
